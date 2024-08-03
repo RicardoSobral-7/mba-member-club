@@ -14,3 +14,9 @@
 - [x] Deve ter um check no cartão fidelidade para cada corte de cabelo que o(a) cliente tiver;
 - [x] Deve ser exibido na tela um progresso com o número de cortes restantes para o prêmio;
 - [x] Deve aparecer na tela um modal de parabéns com a mensagem: “Parabéns! Seu próximo corte é gratuito!” caso o cliente tenha atingido os 10 cortes;
+
+
+### How to run
+ - Run npm i (min node version required v20)
+#### Open a terminal
+ - Run npm run dev to start webpack-dev-server and json server
