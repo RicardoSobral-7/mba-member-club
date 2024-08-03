@@ -1,39 +1,57 @@
-const path = require('path')
-const HTMLWebpackPlugin = require("html-webpack-plugin")
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "src", "js", "index.js"),
+  target: "web",
+  mode: "development",
+
+  entry: path.resolve(__dirname, "src", "main.js"),
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
   },
-  mode: "development",
+
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist', "index.html"),
+      directory: path.join(__dirname, "dist"),
     },
     port: 3000,
-    open: true
+    open: true,
+    liveReload: true,
   },
-  plugins: [new HTMLWebpackPlugin()],
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src", "index.html"),
+      favicon: path.resolve(__dirname, "src", "assets", "Logo.png"),
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "assets"),
+          to: path.resolve(__dirname, "dist", "src", "assets"),
+        },
+      ],
+    }),
+  ],
+
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(?:js|mjs|cjs)$/,
+        test: /.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [
-              ['@babel/preset-env', { targets: "defaults" }]
-            ]
-          }
-        }
-      }
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
     ],
   },
-}
+};
