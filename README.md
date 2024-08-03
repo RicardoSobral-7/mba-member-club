@@ -17,6 +17,6 @@
 
 
 ### How to run
- - Run npm i (min node version required v20)
 #### Open a terminal
- - Run npm run dev to start webpack-dev-server and json server
+ - Run **npm i** (min node version required v20)
+ - Run **npm run dev** will start webpack-dev-server and json server
